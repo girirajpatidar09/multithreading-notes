@@ -253,7 +253,7 @@ Note :  Some platform won't provide proper support for thread safety
 
 # Exploring Examples ::
 
-## Example 1 : 
+## Example  : 
 ```java
 class A  extends Thread
 {
@@ -291,7 +291,7 @@ Child  Thread
 
 
 
-## Example 2 :
+## Example  :
 
 ```java
 class A  extends Thread
@@ -337,6 +337,45 @@ Main method
 ---
 
 
+##  Example :
+
+```java
+
+class A  extends Thread
+{
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(" Child  Thread");
+		}
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		
+		A a1 = new  A();
+		a1.start();
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Main method");
+		}
+	}
+}
+
+```
+---
+
+## Output :
+
+``` text
+We are getting mixed output here
+```
+
+---
 
 
 
