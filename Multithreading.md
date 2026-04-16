@@ -783,6 +783,49 @@ Exception in thread "main" java.lang.IllegalThreadStateException
 ---
 
 
+## Example :
+
+``` java
+class A extends Thread
+{
+	public void start()
+	{
+		super.start();
+	}
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Run Method:"+i);
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.start();
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Main Method"+i);
+		}
+		
+	}
+}
+```
+
+---
+
+## Output :
+
+```text
+Mixed Output
+```
+
+---
+
+
 
 
 
