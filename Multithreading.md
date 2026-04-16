@@ -990,6 +990,94 @@ we are getting mixed output
 
 ---
 
+## Example :
+
+```java
+class A implements Runnable
+{
+	A()
+	{
+		A a2 = new A();
+		Thread t1 = new Thread(a2);
+		Thread t2 = new Thread(a2);
+		t1.start();
+		t2.start();
+		
+	}
+	
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(i);
+			try{Thread.sleep(100);}catch(Exception e) {}
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+	}
+}
+```
+---
+
+## Output ::
+```text
+StackOverFlowError
+```
+---
+
+
+## Example :
+
+```java
+class A implements Runnable
+{
+	A()
+	{
+		
+		Thread t1 = new Thread(this);
+		Thread t2 = new Thread(this);
+		t1.start();
+		t2.start();
+		
+	}
+	
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(i);
+			try{Thread.sleep(100);}catch(Exception e) {}
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+	}
+}
+```
+---
+
+## Output ::
+```text
+Mixed Output
+```
+---
+
+
+
+
+
+
 
 
 
