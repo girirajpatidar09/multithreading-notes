@@ -826,6 +826,109 @@ Mixed Output
 ---
 
 
+## Example :
+
+
+``` java
+class A extends Thread
+{
+	public void start()
+	{
+		super.start();
+	}
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Run Method:"+i);
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.start();
+		a1.start();
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Main Method"+i);
+		}
+		
+	}
+}
+
+```
+---
+
+## Output :
+
+``` text
+Exception in thread "main" java.lang.IllegalThreadStateException
+        at java.base/java.lang.Thread.start(Thread.java:802)
+        at A.start(demo1.java:5)
+        at demo1.main(demo1.java:21)
+Run Method:1
+Run Method:2
+Run Method:3
+Run Method:4
+Run Method:5
+
+```
+
+---
+
+
+## Example :
+
+``` java
+class A extends Thread
+{
+	public void start()
+	{
+		super.start();
+		super.start();
+	}
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Run Method:"+i);
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.start();
+		
+		
+	}
+}
+```
+
+---
+
+## Output :
+
+``` text
+Exception in thread "main" java.lang.IllegalThreadStateException
+        at java.base/java.lang.Thread.start(Thread.java:802)
+        at A.start(demo1.java:6)
+        at demo1.main(demo1.java:21)
+Run Method:1
+Run Method:2
+Run Method:3
+Run Method:4
+Run Method:5
+```
+
+---
+
+
 
 
 
