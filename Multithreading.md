@@ -929,6 +929,70 @@ Run Method:5
 ---
 
 
+## Example :
+
+``` java
+class A implements Runnable
+{
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Run Method"+i);
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		Thread t1 = new Thread(a1);
+		t1.start();
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Main Method"+i);
+		}
+	}
+}
+```
+
+OR Shorter version of above program using lambda expression 
+
+```java
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		Thread t1 = new Thread(()->
+		{
+			for(int i=1;i<=5;i++)
+			{
+				System.out.println("Run  method "+i);
+			}
+		});
+		t1.start();
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("Main Method"+i);
+		}
+	}
+}
+```
+---
+
+## Output :
+``` text
+we are getting mixed output 
+```
+
+---
+
+
+
+
 
 
 
