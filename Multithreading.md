@@ -1180,6 +1180,157 @@ Cut Ticket 5
 This is also a bad process for cut ticket and show ticket
 ```
 
+---
+
+## Example :
+
+``` java
+class A extends Thread
+{
+	String s;
+	A(String s)
+	{
+		this.s=s;
+	}
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(s+" "+i);
+			try{Thread.sleep(100);} catch(Exception e) {}
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A("aaa");
+		A a2 = new A("bbb");
+		a1.start();
+	try {a1.join();} catch(Exception e) {}
+		a2.start();
+		
+		
+	}
+}
+``` 
+---
+
+## Output :
+
+``` text 
+aaa 1
+aaa 2
+aaa 3
+aaa 4
+aaa 5
+bbb 1
+bbb 2
+bbb 3
+bbb 4
+bbb 5
+```
+---
+
+## Example :
+
+``` java
+class A extends Thread
+{
+	String s;
+	A(String s)
+	{
+		this.s=s;
+	}
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(s+" "+i);
+			try{Thread.sleep(100);} catch(Exception e) {}
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A("aaa");
+		A a2 = new A("bbb");
+		a1.start();
+	
+		a2.start();
+		System.out.println(a1.isAlive());
+		System.out.println(a2.isAlive());
+		
+	}
+}
+```
+---
+
+## Output :
+
+```text
+
+true   false
+false  true
+true   true
+false  false
+```
+
+---
+
+
+## Example :
+
+``` java
+class A extends Thread
+{
+	String s;
+	A(String s)
+	{
+		this.s=s;
+	}
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(s+" "+i);
+			try{Thread.sleep(100);} catch(Exception e) {}
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A("aaa");
+		A a2 = new A("bbb");
+		a1.start();
+	
+		a2.start();
+		try{
+			a1.join();
+		} catch(Exception e){}
+		
+		System.out.println(a1.isAlive());
+		System.out.println(a2.isAlive());
+		
+	}
+}
+```
+---
+
+## Output :
+
+``` text
+false
+false/true
+```
+
+---
+
 
 
 
