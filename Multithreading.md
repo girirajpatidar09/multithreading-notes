@@ -378,6 +378,286 @@ We are getting mixed output here
 ---
 
 
+## Example ::
+
+``` java
+class A  extends Thread
+{
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(i);
+		}
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		
+		A a1 = new  A();
+		A a2 = new A();
+		a1.start();
+		a2.start();
+		
+	}
+}
+```
+
+---
+
+## Output :
+``` text
+Mixed Output
+```
+
+---
+
+
+## Example :
+
+``` java
+
+class A  extends Thread
+{
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(i);
+		}
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		
+		A a1 = new  A();
+		a1.start();
+		a1.start();
+		
+	}
+}
+
+```
+---
+
+## Output :
+
+```text
+Exception in thread "main" 1
+2
+3
+4
+5
+java.lang.IllegalThreadStateException
+        at java.base/java.lang.Thread.start(Thread.java:802)
+        at demo1.main(demo1.java:20)
+		
+		
+Here  exception ocuurs  because we are execution start() method twice for same thread ,but thread which will get CPU completes its
+execution.
+		
+```
+
+---
+
+
+## Example :
+
+```java
+class A  extends Thread
+{
+	public void run()
+	{
+		for(int i=1;i<=1000;i++)
+		{
+			System.out.println("Run Method "+i);
+		}
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		
+		A a1 = new A();
+		a1.start();
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+		a1.stop();
+		
+	}
+}
+
+```
+
+---
+
+## Output ::
+```text
+Run Method 1
+Run Method 2
+Run Method 3
+-
+-
+-
+-
+Run Method 670
+
+Thread stops suddenly 
+```
+
+
+## Example : 
+
+```java
+class A  extends Thread
+{
+	public void run()
+	{
+		for(int i=1;i<=1000;i++)
+		{
+			System.out.println("Run Method "+i);
+		}
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		
+		A a1 = new A();
+		a1.start();
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		a1.suspend();
+		
+		
+		
+		
+		
+	}
+}
+```
+---
+
+## Output :
+```text
+Run Method 1
+Run Method 2
+Run Method 3
+-
+-
+-
+-
+Run Method 860
+
+Thread suspended suddenly
+```
+
+
+## Example :
+
+
+``` java
+class A  extends Thread
+{
+	public void run()
+	{
+		for(int i=1;i<=1000;i++)
+		{
+			System.out.println("Run Method "+i);
+		}
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		
+		A a1 = new A();
+		a1.start();
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		a1.suspend();
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+		a1.resume();
+		
+		
+		
+		
+		
+		
+	}
+}
+```
+
+---
+
+## Output :
+
+```text
+Run Method 1
+Run Method 2
+Run Method 3
+-
+-
+-
+-
+Run Method 1000
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
