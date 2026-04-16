@@ -1332,6 +1332,29 @@ false/true
 ---
 
 
+## Example : 
+
+``` java
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		System.out.println(Thread.currentThread());
+	}
+}
+
+
+Output :
+
+Thread[main,5,main]
+
+```
+
+---
+
+
+
 
 
 
