@@ -722,6 +722,7 @@ class demo1
 ---
 
 ## Output :
+
 ``` text
 start Method
 start Method
@@ -736,6 +737,53 @@ Main method
 ```
 
 ---
+
+## Example : 
+
+``` java
+class A extends Thread
+{
+	public void start()
+	{
+		for(int i=1;i<=5;i++)
+		{
+		
+        super.start();
+        System.out.println(i);		
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.start();
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(i);
+		}
+		
+	}
+}
+
+```
+---
+
+## Output : 
+
+``` text
+1
+Exception in thread "main" java.lang.IllegalThreadStateException
+        at java.base/java.lang.Thread.start(Thread.java:802)
+        at A.start(demo1.java:8)
+        at demo1.main(demo1.java:18)
+
+```
+---
+
+
+
 
 
 
