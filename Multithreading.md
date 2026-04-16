@@ -1074,6 +1074,115 @@ Mixed Output
 ---
 
 
+## Example :
+
+``` java
+class A 
+{
+	String s;
+	A(String s)
+	{
+		this.s=s;
+	}
+	public void show()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(s+" "+i);
+			try{Thread.sleep(100);} catch(Exception e) {}
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A("Cut Ticket");
+		A a2 = new A("Show Ticket");
+		a1.show();
+		a2.show();
+		
+		
+	}
+}
+```
+---
+
+## Output :
+
+```text
+Cut Ticket 1
+Cut Ticket 2
+Cut Ticket 3
+Cut Ticket 4
+Cut Ticket 5
+Show Ticket 1
+Show Ticket 2
+Show Ticket 3
+Show Ticket 4
+Show Ticket 5
+
+Bad process for ticket cutting  and show ticket
+
+```
+---
+
+
+## Example :
+
+``` java
+class A extends Thread
+{
+	String s;
+	A(String s)
+	{
+		this.s=s;
+	}
+	public void run()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println(s+" "+i);
+			try{Thread.sleep(100);} catch(Exception e) {}
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A("Cut Ticket");
+		A a2 = new A("Show Ticket");
+		a1.start();
+		a2.start();
+		
+		
+	}
+}
+
+```
+
+---
+## Output :
+
+``` text
+Cut Ticket 1
+Show Ticket 1
+Show Ticket 2
+Cut Ticket 2
+Cut Ticket 3
+Show Ticket 3
+Cut Ticket 4
+Show Ticket 4
+Show Ticket 5
+Cut Ticket 5
+
+This is also a bad process for cut ticket and show ticket
+```
+
+
+
+
 
 
 
