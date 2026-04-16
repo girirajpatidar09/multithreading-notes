@@ -1348,6 +1348,7 @@ class demo1
 Output :
 
 Thread[main,5,main]
+Thread[thread-name, priority, thread-group-name]
 
 ```
 
