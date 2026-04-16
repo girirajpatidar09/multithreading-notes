@@ -692,6 +692,52 @@ resume() → kabhi reach hi nahi hua!
 ```
 ---
 
+## Example : We can override start() Method
+
+``` java
+class A extends Thread 
+{
+	public void start()
+	{
+		for(int i=1;i<=5;i++)
+		{
+			System.out.println("start Method");
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.start();
+		for(int i =1 ;i<=5;i++)
+		{
+			System.out.println("Main method");
+			
+		}
+	}
+}
+```
+---
+
+## Output :
+``` text
+start Method
+start Method
+start Method
+start Method
+start Method
+Main method
+Main method
+Main method
+Main method
+Main method
+```
+
+---
+
+
 
 
 
