@@ -639,6 +639,60 @@ Run Method 1000
 ```
 
 
+## Example :
+
+```java 
+class A  extends Thread 
+{
+	public void run()
+	{
+		for(int i=1;i<=100000;i++)
+		{
+			System.out.println("Run method :" +i);
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.start();
+		
+		try{Thread.sleep(1000);}catch(Exception e){}
+		
+		a1.suspend();
+		System.out.println("__________");
+		a1.resume();
+		
+	}
+}
+```
+
+---
+
+## Output 
+
+``` text
+a1 thread:
+println() call kiya
+    → System.out ka lock liya 🔒
+        → suspend() call ho gaya
+            → a1 freeze ho gaya
+            → BUT System.out lock abhi bhi a1 ke paas hai! 🔒
+
+Main thread:
+println("__________") call kiya
+    → System.out ka lock chahiye
+    → a1 ke paas hai lock
+    → Main thread WAIT karne laga... ♾️
+
+resume() → kabhi reach hi nahi hua!
+
+```
+---
+
+
 
 
 
