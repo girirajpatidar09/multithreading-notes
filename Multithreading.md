@@ -1601,10 +1601,10 @@ Synchronization is the tool , use to control  to a shared resources by multiple 
  
  
 ## Method synchronization :
-```text
+
 By declaring the  method synchronized the entire method is treated as critical section , ensuring that only one thread can execute that method at any given time.
 This approach locks the entire method preventing other thread from accessing it until the first thread finehses its execution.
-```
+
 ---
 
 
