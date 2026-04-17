@@ -1586,18 +1586,15 @@ Data inconsistency occurs when multiple threads access and modify the same share
 
 ## What is Race Condition ?
 
-``` text
-A race condition occurs when two or more threads access shared data at the same time, which leads to  data inconsistency.
-```
 
----
+A race condition occurs when two or more threads access shared data at the same time, which leads to  data inconsistency.
+
 
 ## What is  Synchronization ?
-```text
+
 Synchronization is the tool , use to control  to a shared resources by multiple threads. Its main purpose is to prevent  a problem called a “race- condition ”.
- where several threads try to change the same data at same time, leading to corrupted and unpredicatable results.
- ```
----
+where several threads try to change the same data at same time, leading to corrupted and unpredicatable results.
+ 
  
  
 ## Method synchronization :
@@ -1605,14 +1602,14 @@ Synchronization is the tool , use to control  to a shared resources by multiple 
 By declaring the  method synchronized the entire method is treated as critical section , ensuring that only one thread can execute that method at any given time.
 This approach locks the entire method preventing other thread from accessing it until the first thread finehses its execution.
 
----
+
 
 
 ## Block synchronization :
-```text
+
 If we only need to execute some subsequent lines of code not all lines of code within a method , then we should  go  for synchronized block .
-```
----
+
+
 
 
 
