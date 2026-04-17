@@ -1402,6 +1402,41 @@ Current Thread after Changing Priority :Thread[main,10,main]
 
 ---
 
+## Example :
+
+``` java
+class demo1
+{
+	public static void main(String ar[])
+	{
+		System.out.println("Current Thread : "+Thread.currentThread());
+		Thread.currentThread().setPriority(11);
+		
+		
+	}
+}
+
+Output :
+
+Current Thread : Thread[main,5,main]
+Exception in thread "main" java.lang.IllegalArgumentException
+        at java.base/java.lang.Thread.setPriority(Thread.java:1149)
+        at demo1.main(demo1.java:7)
+
+
+```
+
+---
+
+## Thread Priority Constants 
+``` text
+public static final int MIN_PRIORITY = 1;
+public static final int NORM_PRIORITY = 5;
+public static final int MAX_PRIORITY = 10;
+```
+---
+
+
 
 
 
