@@ -1437,75 +1437,124 @@ public static final int MAX_PRIORITY = 10;
 ---
 
 
+## Example :
+
+``` java
+class A  extends Thread
+{
+	public void run()
+	{
+		System.out.println(Thread.currentThread());
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		A a2 = new A();
+		a1.start();
+		a2.start();
+		System.out.println(Thread.currentThread());
+	}
+}
+
+Output :
+
+Thread[main,5,main]
+Thread[Thread-1,5,main]
+Thread[Thread-0,5,main]
+
+Mixed outptut
+
+```
+---
+
+
+## Example :
+
+``` java
+class A  extends Thread
+{
+	public void run()
+	{
+		System.out.println(Thread.currentThread());
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		A a2 = new A();
+		a1.start();
+		a2.start();
+		a1.setName("aaa");
+		a2.setName("bbb");
+		System.out.println(Thread.currentThread());
+	}
+}
+
+Output :
+Mixed output 
+
+```
+---
+
+## Example :
+
+``` java
+class A  extends Thread
+{
+	public void run()
+	{
+		
+	}
+	
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		A a2 = new A();
+		a1.start();
+		a2.start();
+		a1.setName("aaa");
+		a2.setName("bbb");
+		System.out.println(a1);
+		System.out.println(a2);
+	}
+}
+
+Output :
+
+All Possible Outcomes
+
+Case 1 — Both threads still alive
+Thread[aaa,5,main]
+Thread[bbb,5,main]
+
+Case 2 — Both threads finished
+Thread[aaa,5,]
+Thread[bbb,5,]
 
+Case 3 — a1 finished, a2 still alive
+Thread[aaa,5,]
+Thread[bbb,5,main]
 
+Case 4 — a1 still alive, a2 finished
+Thread[aaa,5,main]
+Thread[bbb,5,]
 
 
+The second field is thread group name, and after a thread finishes execution, its thread group can become null or empty.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+---
 
 
 
