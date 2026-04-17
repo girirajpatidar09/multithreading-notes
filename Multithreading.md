@@ -1355,6 +1355,55 @@ Thread[thread-name, priority, thread-group-name]
 ---
 
 
+## Example :
+
+``` java
+class demo1
+{
+	public static void main(String ar[])
+	{
+		System.out.println("Current Thread : "+Thread.currentThread());
+		System.out.println("Current Thread  Name : "+Thread.currentThread().getName());
+		Thread.currentThread().setName("aaa");
+		System.out.println("Current Thread after Changing Name :" +Thread.currentThread());
+		
+	}
+}
+
+Output :
+Current Thread : Thread[main,5,main]
+Current Thread  Name : main
+Current Thread after Changing Name :Thread[aaa,5,main]
+```
+---
+
+
+## Example :
+
+``` java
+class demo1
+{
+	public static void main(String ar[])
+	{
+		System.out.println("Current Thread : "+Thread.currentThread());
+		System.out.println("Current Thread  Priority : "+Thread.currentThread().getPriority());
+		Thread.currentThread().setPriority(10);
+		System.out.println("Current Thread after Changing Priority :" +Thread.currentThread());
+		
+	}
+}
+
+Output :
+
+Current Thread : Thread[main,5,main]
+Current Thread  Priority : 5
+Current Thread after Changing Priority :Thread[main,10,main]
+```
+
+---
+
+
+
 
 
 
