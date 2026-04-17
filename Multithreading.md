@@ -1588,6 +1588,8 @@ A race condition occurs when two or more threads access shared data at the same 
 
 Synchronization is the tool , use to control  to a shared resources by multiple threads. Its main purpose is to prevent  a problem called a “race- condition ”.
 where several threads try to change the same data at same time, leading to corrupted and unpredicatable results.
+
+
  
  
  
@@ -1600,8 +1602,37 @@ This approach locks the entire method preventing other thread from accessing it 
 
 
 ## Block synchronization :
-
 If we only need to execute some subsequent lines of code not all lines of code within a method , then we should  go  for synchronized block .
+
+
+## Can a constructor be synchronized ?
+No.
+
+
+## What is Object level lock ?
+Object level lock is a mechanism where every object in Java has a built-in lock (monitor), and when a thread enters a synchronized method or block, 
+it acquires that object's lock — no other thread can enter any synchronized method of that same object until the lock is released.
+
+## What is Class level Object ?
+
+```text
+A class-level lock is a lock that is applied on the Class object itself and is shared by all objects of that class.
+In Java, class-level locking is achieved using:
+•	static synchronized methods
+•	synchronized(ClassName.class)
+
+
+┌──────────────────────────────────────────────────────────────┐
+│  - Every CLASS has ONE lock (on the .class object)          │
+│  - Achieved using "static synchronized" keyword             │
+│  - Only ONE thread can hold the lock at a time              │
+│  - Applies across ALL objects of that class                 │
+│  - Used to protect STATIC data                              │
+└──────────────────────────────────────────────────────────────┘
+
+```
+---
+
 
 
 
