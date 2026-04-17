@@ -1557,6 +1557,68 @@ The second field is thread group name, and after a thread finishes execution, it
 ---
 
 
+# Synchronization  :
+
+
+## What is Shared Resource ?
+
+``` text
+A shared resource is any data or object that is accessed by more than one thread at the same time.Because multiple threads use it together, it can cause data 
+inconsistency if not handled properly.
+```
+
+---
+
+
+## What is critical section ?
+``` text
+A critical section is a part of the code where a shared resource is accessed or modified.
+👉Only one thread at a time should execute the critical section to avoid data inconsistency.
+```
+---
+
+## What Is Data Inconsistency?
+```text
+Data inconsistency occurs when multiple threads access and modify the same shared data at the same time, causing the data to become incorrect or unpredictable.
+```
+
+---
+
+## What is Race Condition ?
+
+``` text
+A race condition occurs when two or more threads access shared data at the same time, which leads to  data inconsistency.
+```
+
+---
+
+## What is  Synchronization ?
+```text
+Synchronization is the tool , use to control  to a shared resources by multiple threads. Its main purpose is to prevent  a problem called a “race- condition ”.
+ where several threads try to change the same data at same time, leading to corrupted and unpredicatable results.
+ ```
+---
+ 
+ 
+## Method synchronization :
+```text
+By declaring the  method synchronized the entire method is treated as critical section , ensuring that only one thread can execute that method at any given time.
+This approach locks the entire method preventing other thread from accessing it until the first thread finehses its execution.
+```
+---
+
+
+## Block synchronization :
+```text
+If we only need to execute some subsequent lines of code not all lines of code within a method , then we should  go  for synchronized block .
+```
+---
+
+
+
+
+
+
 
 
 
