@@ -1562,27 +1562,21 @@ The second field is thread group name, and after a thread finishes execution, it
 
 ## What is Shared Resource ?
 
-``` text
 A shared resource is any data or object that is accessed by more than one thread at the same time.Because multiple threads use it together, it can cause data 
 inconsistency if not handled properly.
-```
 
----
 
 
 ## What is critical section ?
-``` text
+
 A critical section is a part of the code where a shared resource is accessed or modified.
 👉Only one thread at a time should execute the critical section to avoid data inconsistency.
-```
----
+
 
 ## What Is Data Inconsistency?
-```text
-Data inconsistency occurs when multiple threads access and modify the same shared data at the same time, causing the data to become incorrect or unpredictable.
-```
 
----
+Data inconsistency occurs when multiple threads access and modify the same shared data at the same time, causing the data to become incorrect or unpredictable.
+
 
 ## What is Race Condition ?
 
