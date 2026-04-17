@@ -1594,7 +1594,7 @@ where several threads try to change the same data at same time, leading to corru
 ## Method synchronization :
 
 By declaring the  method synchronized the entire method is treated as critical section , ensuring that only one thread can execute that method at any given time.
-This approach locks the entire method preventing other thread from accessing it until the first thread finehses its execution.
+This approach locks the entire method preventing other thread from accessing it until the first thread finshses its execution.
 
 
 
@@ -1602,6 +1602,7 @@ This approach locks the entire method preventing other thread from accessing it 
 ## Block synchronization :
 
 If we only need to execute some subsequent lines of code not all lines of code within a method , then we should  go  for synchronized block .
+
 
 
 
