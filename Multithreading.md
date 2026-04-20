@@ -1732,6 +1732,43 @@ a2=50000
 ---
 
 
+``` java
+class A  implements Runnable 
+{
+	static int c=0;
+	public void run()
+	{
+	   for(int i=1;i<=50000;i++)
+	   {
+		   c++;
+	   }
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		A a2 = new A();
+		Thread t1 = new Thread(a1);
+		Thread t2 = new Thread(a2);
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+		
+	}
+}
+```
+
+
+Output :
+Random Numbers
+---
 
 
 
