@@ -1634,6 +1634,107 @@ In Java, class-level locking is achieved using:
 ---
 
 
+## What is deadlock ?
+
+A deadlock is a situation where two or more threads are stuck forever , waiting for each other’s resources and none of them can proceed.
+
+## Deadlock VS Starvation 
+``` text
+	Long waiting of a thread where thread never ends is called deadlock.
+	Long waiting of a thread where waiting ends at certain points is called starvation.
+Eg Low priority thread has to wait until completing all high priority thread . It may be long waiting but ends at certain points which is nothing but starvation .
+```
+---
+
+
+
+
+## Examples :
+
+```java
+class A implements  Runnable
+{
+	int c=0;
+	public void run()
+	{
+	   for(int i=1;i<=50000;i++)
+	   {
+		   c++;
+	   }
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		
+		A a1 = new A();
+		A a2 = new A();
+		Thread t1 = new  Thread(a1);
+		Thread t2 = new Thread(a2);
+		t1.start();
+		t2.start();
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+	}
+	
+}
+
+Output :
+Random numbers
+```
+
+---
+
+
+## Example :
+
+```java
+class A implements  Runnable
+{
+	int c=0;
+	public void run()
+	{
+	   for(int i=1;i<=50000;i++)
+	   {
+		   c++;
+	   }
+	}
+}
+class demo1
+{
+	public static void main(String ar[]) throws Exception 
+	{
+		
+		A a1 = new A();
+		A a2 = new A();
+		Thread t1 = new  Thread(a1);
+		Thread t2 = new Thread(a2);
+		t1.start();
+		t2.start();
+		
+		t1.join();
+		t2.join();
+		
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+	}
+	
+}
+
+Output :
+a1=50000
+a2=50000
+
+```
+---
+
+
+
+
+
 
 
 
