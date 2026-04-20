@@ -1766,7 +1766,7 @@ class demo1
 	}
 }
 Output :
-Random Numbers
+Fixed Random Numbers
 ```
 ---
 
@@ -1803,9 +1803,146 @@ class demo1
 	}
 }
 Output :
-Fixed Any random variable :
+Fixed Any random Number
 ```
 
+---
+
+## Example :
+``` java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public synchronized void run()
+	{
+	   for(int i=1;i<=50000;i++)
+	   {
+		   c++;
+	   }
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		Thread t1 = new Thread(a1);
+		Thread t2 = new Thread(a1);
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		
+		
+		
+	}
+}
+Output :
+100000
+```
+---
+
+## Example
+```java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public synchronized void run()
+	{
+	   for(int i=1;i<=50000;i++)
+	   {
+		   c++;
+	   }
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		Thread t1 = new Thread(a1);
+		Thread t2 = new Thread(a1);
+		t1.start();
+		t2.start();
+		
+		System.out.println("a1="+a1.c);
+		System.out.println("a1="+a1.c);
+		
+		
+		
+	}
+}
+Output :
+Random
+
+```
+---
+
+
+## Example :
+``` java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public synchronized void run()
+	{
+	   for(int i=1;i<=50;i++)
+	   {
+		   System.out.println(Thread.currentThread().getName()+"="+ ++c);
+		   try{Thread.sleep(100);} catch(Exception e){}
+		   }
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		
+		Thread t1 = new Thread(a1);
+		Thread t2 = new Thread(a1);
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		
+		
+		
+		
+		
+	}
+}
+Ouptut :
+Thread-0=1
+Thread-0=2
+...
+Thread-0=50
+Thread-1=51
+Thread-1=52
+...
+Thread-1=100
+
+
+
+OR 
+Thread-1=1
+Thread-1=2
+...
+Thread-1=50
+Thread-0=51
+Thread-0=52
+...
+Thread-0=100
+
+
+```
 ---
 
 
