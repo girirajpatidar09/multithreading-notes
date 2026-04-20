@@ -1763,9 +1763,6 @@ class demo1
 		
 	}
 }
-
-
-
 Output :
 Random Numbers
 ```
