@@ -2167,6 +2167,240 @@ a1=100000
 ```
 ---
 
+## Example 
+```java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public synchronized void run()
+	{
+		for(int i=1;i<=50000;i++)
+		{
+			c++;
+		}
+	}
+	
+	
+	
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		A a2 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a2,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+		
+		
+		
+		
+	}
+}
+Output :
+50000
+50000
+```
+
+----
+
+## Example :
+
+```java
+class A  implements Runnable 
+{
+	
+	static int c=0;
+	public synchronized void run()
+	{
+		for(int i=1;i<=50000;i++)
+		{
+			c++;
+		}
+	}
+	
+	
+	
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		A a2 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a2,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+		
+		
+		
+		
+	}
+}
+Output :
+Random but fixed 
+```
+---
+
+## Example :
+
+```java
+class A  implements Runnable 
+{
+	
+	static int c=0;
+	public static synchronized void run()
+	{
+		for(int i=1;i<=50000;i++)
+		{
+			c++;
+		}
+	}
+	
+	
+	
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		A a2 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a2,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+		
+		
+		
+		
+	}
+}
+Output :
+ error: run() in A cannot implement run() in Runnable
+        public static synchronized void run()
+                                        ^
+  overriding method is static
+  
+```
+---
+
+## Example : Class level lock 
+
+```java
+class A  implements Runnable 
+{
+	
+	static int c=0;
+	
+	synchronized static int getCount()
+	{
+		return ++c;
+	}
+	public  void run()
+	{
+		for(int i=1;i<=50;i++)
+		{
+			System.out.println(Thread.currentThread().getName()+"="+getCount());
+		}
+	}
+	
+	
+	
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		A a2 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a2,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+		
+		
+		
+		
+	}
+}
+
+OR
+class A implements Runnable 
+{
+    static int c = 0;
+
+    public void run()
+    {
+        for(int i = 1; i <= 50; i++)
+        {
+            synchronized(A.class)   // 🔥 class-level lock
+            {
+                System.out.println(Thread.currentThread().getName() + "=" + ++c);
+            }
+        }
+    }
+}
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		A a2 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a2,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		System.out.println("a2="+a2.c);
+		
+		
+		
+		
+		
+	}
+}
+
+Output :
+Mixed
+```
+---
+
 
 
 
