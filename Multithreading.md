@@ -2401,6 +2401,83 @@ Mixed
 ```
 ---
 
+## Example :
+```java
+class A implements Runnable
+{
+	int t=1;
+	public void run()
+	{
+		if(t>=1)
+		{
+			t=t-1;
+			System.out.println("Ticket Booked by :" +Thread.currentThread().getName());
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a1,"B");
+		t1.start();
+		t2.start();
+	}
+}
+Output : Mixed Output 
+```
+---
+
+## Example :
+
+```java
+class A implements Runnable
+{
+	int t=5;
+	public void run()
+	{
+		if(t>=1)
+		{
+			t=t-5;
+			System.out.println("Ticket Booked by :" +Thread.currentThread().getName());
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a1,"B");
+		Thread t3 = new Thread(a1,"C");
+		Thread t4 = new Thread(a1,"D");
+		Thread t5 = new Thread(a1,"E");
+		Thread t6 = new Thread(a1,"F");
+		Thread t7 = new Thread(a1,"G");
+		Thread t8 = new Thread(a1,"H");
+		Thread t9 = new Thread(a1,"I");
+		Thread t10 = new Thread(a1,"J");
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+		t5.start();
+		t6.start();
+		t7.start();
+		t8.start();
+		t9.start();
+		t10.start();
+	}
+}
+Output :
+Mixed Output :
+```
+---
+
+
 
 
 
