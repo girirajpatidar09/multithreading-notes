@@ -1945,6 +1945,845 @@ Thread-0=100
 ```
 ---
 
+## Example :
+``` java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public synchronized void run()
+	{
+	   for(int i=1;i<=50;i++)
+	   {
+		   System.out.println(Thread.currentThread().getName()+"="+ ++c);
+		   try{Thread.sleep(100);} catch(Exception e){}
+		   }
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a1,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		
+		
+		
+		
+		
+	}
+}
+Output :
+Either start with Thread A or Thread B 
+```
+---
+
+## Example :
+```java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public int getCount()
+	{
+		return ++c;
+	}
+	
+	public void run()
+	{
+		for(int i=1;i<=50000;i++)
+		{
+			getCount();
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a1,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		
+		
+		
+		
+		
+	}
+}
+Output :
+Any Random Number
+```
+---
+
+## Example :
+``` java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public int getCount()
+	{
+		return ++c;
+	}
+	
+	public  synchronized void run()
+	{
+		for(int i=1;i<=50000;i++)
+		{
+			getCount();
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a1,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		
+		
+		
+		
+		
+	}
+}
+Output :
+100000
+```
+---
+
+## Example :
+```java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	public  synchronized int getCount()
+	{
+		return ++c;
+	}
+	
+	public   void run()
+	{
+		for(int i=1;i<=50000;i++)
+		{
+			System.out.println(Thread.currentThread().getName()+"="+getCount());
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a1,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		
+		
+		
+		
+		
+	}
+}
+
+Output :
+Mixed Output 
+```
+---
+
+## Example :
+
+``` java
+class A  implements Runnable 
+{
+	
+	int c=0;
+	
+	
+	public void run()
+	{
+		for(int i=1;i<=50000;i++)
+		{
+			synchronized(this)
+			{
+				++c;
+			}
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception
+	{
+		A a1 = new A();
+		
+		Thread t1 = new Thread(a1,"A");
+		Thread t2 = new Thread(a1,"B");
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		System.out.println("a1="+a1.c);
+		
+		
+		
+		
+		
+	}
+}
+Output :
+a1=100000
+```
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
