@@ -2658,6 +2658,308 @@ NullPointerException
 ```
 ---
 
+## Example : DeadLock through Synchronization block
+``` java
+class A  {}
+
+class B {}
+
+class C extends Thread
+{
+	A a1;
+	B b1;
+	C(A a1 , B b1)
+	{
+		this.a1=a1;
+		this.b1=b1;
+	}
+	
+	public void run()
+	{
+		System.out.println("Class C run method");
+		synchronized(a1)
+		{
+	     System.out.println("Class C block 1");
+		 synchronized(b1)
+		 {
+			 System.out.println("Class C block 2");
+		 }
+		}
+	}
+}
+
+class D extends Thread
+{
+	A a1;
+	B b1;
+	D(A a1 , B b1)
+	{
+		this.a1=a1;
+		this.b1=b1;
+	}
+	
+	public void run()
+	{
+		System.out.println("Class D run method");
+		synchronized(b1)
+		{
+	     System.out.println("Class D block 1");
+		 synchronized(a1)
+		 {
+			 System.out.println("Class D  block 2");
+		 }
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		B b1 = new B();
+		C c1 = new C(a1,b1);
+		D d1 = new D(a1,b1);
+		c1.start();
+		d1.start();
+	}
+}
+Output 
+DeadLock 
+```
+---
+
+## Example :
+``` java
+class A  {}
+
+class B {}
+
+class C extends Thread
+{
+	A a1;
+	B b1;
+	C(A a1 , B b1)
+	{
+		this.a1=a1;
+		this.b1=b1;
+	}
+	
+	public void run()
+	{
+		System.out.println("Class C run method");
+		synchronized(a1)
+		{
+	     System.out.println("Class C block 1");
+		 synchronized(b1)
+		 {
+			 System.out.println("Class C block 2");
+		 }
+		}
+	}
+}
+
+class D extends Thread
+{
+	A a1;
+	B b1;
+	D(A a1 , B b1)
+	{
+		this.a1=a1;
+		this.b1=b1;
+	}
+	
+	public void run()
+	{
+		System.out.println("Class D run method");
+		synchronized(new B())
+		{
+	     System.out.println("Class D block 1");
+		 synchronized(new A())
+		 {
+			 System.out.println("Class D  block 2");
+		 }
+		}
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		B b1 = new B();
+		C c1 = new C(a1,b1);
+		D d1 = new D(a1,b1);
+		c1.start();
+		d1.start();
+	}
+}
+Output : Mixed 
+```
+---
+
+## Example : Example of DeadLock throuhg Synchrinized method
+``` java
+class A 
+{
+	public synchronized void show1()
+	{
+		System.out.println("Class A show1 method");
+		
+	}
+	public  synchronized void show2(B b1)
+	{
+		System.out.println("Class A show 2 method");
+		b1.show1();
+	}
+
+}
+class B 
+{
+	public synchronized void show1()
+	{
+		System.out.println("class B show1 method ");
+	}
+	
+	public synchronized void show2(A a1)
+	{
+		System.out.println("class B show2 method");
+		a1.show1();
+	}
+}
+
+class C extends Thread
+{
+	A a1;
+	B b1;
+	 C(A a1 , B b1)
+	 {
+		 this.a1=a1;
+		 this.b1=b1;
+	 }
+	 
+	 public void run()
+	 {
+		 a1.show2(b1);
+	 }
+}
+
+
+class D extends Thread
+{
+	A a1;
+	B b1;
+	 D(A a1 , B b1)
+	 {
+		 this.a1=a1;
+		 this.b1=b1;
+	 }
+	 
+	 public void run()
+	 {
+		 b1.show2(a1);
+	 }
+}
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1  = new A();
+		B b1 = new  B();
+		C c1 = new C(a1,b1);
+		D d1 = new D(a1,b1);
+		
+		c1.start();
+		d1.start();
+	}
+}
+Output :
+Deadlock
+```
+---
+
+## Example :
+``` java
+class A 
+{
+	public synchronized void show1()
+	{
+		System.out.println("Class A show1 method");
+		
+	}
+	public  synchronized void show2(B b1)
+	{
+		System.out.println("Class A show 2 method");
+		b1.show1();
+	}
+
+}
+class B 
+{
+	public synchronized void show1()
+	{
+		System.out.println("class B show1 method ");
+	}
+	
+	public synchronized void show2(A a1)
+	{
+		System.out.println("class B show2 method");
+		new A().show1();
+	}
+}
+
+class C extends Thread
+{
+	A a1;
+	B b1;
+	 C(A a1 , B b1)
+	 {
+		 this.a1=a1;
+		 this.b1=b1;
+	 }
+	 
+	 public void run()
+	 {
+		 a1.show2(b1);
+	 }
+}
+
+
+class D extends Thread
+{
+	A a1;
+	B b1;
+	 D(A a1 , B b1)
+	 {
+		 this.a1=a1;
+		 this.b1=b1;
+	 }
+	 
+	 public void run()
+	 {
+		 b1.show2(a1);
+	 }
+}
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1  = new A();
+		B b1 = new  B();
+		C c1 = new C(a1,b1);
+		D d1 = new D(a1,b1);
+		
+		c1.start();
+		d1.start();
+	}
+}
+Output :
+Mixed output 
+```
+---
 
 
 
