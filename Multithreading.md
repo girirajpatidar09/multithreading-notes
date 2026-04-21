@@ -2477,6 +2477,188 @@ Mixed Output :
 ```
 ---
 
+## Example :
+``` java
+class A implements Runnable
+{
+	int t=5;
+	public void run()
+	{
+		if(t>=1)
+		{
+			t=t-1;
+			System.out.println("Ticket Booked by :" +Thread.currentThread().getName());
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		String s[] = {"A", "B", "C" ,"D" , "E", "F", "G", "H", "I", "J"};
+		Thread t1[] = new Thread[s.length];
+		for(int i=0;i<s.length;i++)
+		{
+			t1[i]=new Thread(a1,s[i]);
+		}
+		
+	    for(int i=0;i<s.length;i++)
+		{
+			t1[i].start();
+		}
+	}
+}
+Output :
+Mixed Output 
+```
+---
+
+## Example :
+``` java
+class A  implements Runnable
+{
+	B b1 ;
+	A()
+	{
+		
+	}
+	A (B b1)
+	{
+		this.b1=b1;
+	}
+	
+	public void run()
+	{
+		synchronized(b1)
+		{
+			for(int i=1;i<=5;i++)
+			{
+				System.out.println("Class A ");
+			}
+		}
+	}
+	
+}
+class B implements Runnable
+{
+	A a1 ;
+	B()
+	{}
+	
+	B(A a1 )
+	{
+		this.a1=a1;
+	}
+	
+	public void run()
+	{
+		synchronized(a1)
+		{
+			for(int i=1;i<=5;i++)
+			{
+				System.out.println("Class B ");
+			}
+		
+		}
+	}
+}
+
+class demo1
+{
+	public static void  main(String ar[])
+	{
+		A a1= new A();
+		B b1 = new B();
+		
+		A a11 = new A(b1);
+		B b11 = new B(a1);
+		
+		Thread t1 =new  Thread(a11,"A");
+		Thread t2 =new  Thread(b11,"B");
+		
+		t1.start();
+		t2.start();
+	}
+}
+Output : 
+Mixed Output 
+```
+---
+
+## Example :
+``` java
+class A  implements Runnable
+{
+	B b1 ;
+	A()
+	{
+		
+	}
+	A (B b1)
+	{
+		this.b1=b1;
+	}
+	
+	public void run()
+	{
+		synchronized(b1)
+		{
+			for(int i=1;i<=5;i++)
+			{
+				System.out.println("Class A ");
+			}
+		}
+	}
+	
+}
+class B implements Runnable
+{
+	A a1 ;
+	B()
+	{}
+	
+	B(A a1 )
+	{
+		this.a1=a1;
+	}
+	
+	public void run()
+	{
+		synchronized(a1)
+		{
+			for(int i=1;i<=5;i++)
+			{
+				System.out.println("Class B ");
+			}
+		
+		}
+	}
+}
+
+class demo1
+{
+	public static void  main(String ar[])
+	{
+		A a1= new A();
+		B b1 = new B();
+		
+		A a11 = new A(b1);
+		B b11 = new B(a1);
+		
+		Thread t1 =new  Thread(a1,"A");
+		Thread t2 =new  Thread(b1,"B");
+		
+		t1.start();
+		t2.start();
+	}
+}
+Output :
+NullPointerException 
+```
+---
+
+
 
 
 
