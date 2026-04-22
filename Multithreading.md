@@ -2961,6 +2961,41 @@ Mixed output
 ```
 ---
 
+# wait() , wait(long) , wait(long, int) ,notify(), notifyAll()
+wait() , notify() , notifyAll() all are used for inter thread communication.
+
+## What is wait() method in java >
+wait()  is a method in object  class that causes the current thread to pause execution and releases the lock(monitor) on that object ,putting
+the thread into waiting state untill it is awkened by notify() or notifyAll().
+
+## What is notify() method ?
+```text
+notify() method in the object  class that wake up a single thread i.e waiting thread on monitor(lock) of object.
+The choosen thread moves from waiting state and it will resume execution only after it successfully re-acquires the lock.
+``` 
+---
+
+## Real life scenario for both  wait() and notifyAll()
+``` java
+classroom-question-answer
+
+Thread A (Student) -> has a question 
+
+Thread B (Teacher) -> has the answer
+
+The speaking  time in claas = monitor lock.
+
+Flow :
+Student asks a question and wait( wait() ) , giving the floor to  teacher
+
+Teacher thinks and prepare the answer-
+
+Teacher says : "Here the answer" (notify()) student  resumes the conversations
+```
+---
+
+
+
 ## Example :
 
 ``` java
@@ -3343,6 +3378,64 @@ then stuck  forever
 
 ```
 ---
+
+## Example :
+``` java
+class A implements Runnable 
+{
+	synchronized void show1()
+	{
+		System.out.println("ccc");
+		System.out.println("notify() method call");
+		notify();
+		System.out.println("ddd");
+		
+	}
+	synchronized void show2()
+	{
+		System.out.println("aaa");
+		System.out.println("wait method call  ");
+		try{ wait (); } catch(Exception e) {}
+		System.out.println("bbb");
+	}
+	
+	int c=0;
+	public void run()
+	{
+		if(c==0)
+		{
+			c++;
+			show2();
+		}
+		else
+			show1();
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		
+		Thread t1 = new Thread(a1);
+		Thread t2 = new Thread(a1);
+		
+		t1.start();
+		t2.start();
+		
+	}
+}
+Output :
+aaa
+wait method call
+ccc
+notify() method call
+ddd
+bbb
+```
+---
+
+
 
 
 
