@@ -2961,6 +2961,102 @@ Mixed output
 ```
 ---
 
+## Example :
+
+``` java
+class demo1
+{
+	public static void main(String ar[])
+	{
+		System.out.println("aaa");
+		wait();
+		System.out.println("bbb");
+	}
+}
+Output :
+ error: non-static method wait() cannot be referenced from a static context
+```
+---
+
+## Example :
+```java
+class A 
+{
+	void show()
+	{
+		System.out.println("aaa");
+		wait();
+		System.out.println("bbb");
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.show();
+	}
+}
+Output :
+error: unreported exception InterruptedException; must be caught or declared to be thrown
+```
+---
+
+## Example : 
+``` java
+class A 
+{
+	void show() throws Exception 
+	{
+		System.out.println("aaa");
+		wait();
+		System.out.println("bbb");
+	}
+}
+class demo1
+{
+	public static void main(String ar[]) throws Exception 
+	{
+		A a1 = new A();
+		a1.show();
+	}
+}
+Output :
+aaa
+Exception in thread "main" java.lang.IllegalMonitorStateException: current thread is not owner
+```
+---
+
+## Example :
+``` java
+class A 
+{
+	void show() throws Exception 
+	{
+		System.out.println("aaa");
+		try{
+		wait();
+		} catch(Exception e) {}
+		System.out.println("bbb");
+	}
+}
+class demo1
+{
+	public static void main(String ar[]) throws Exception 
+	{
+		A a1 = new A();
+		a1.show();
+	}
+}
+Output : 
+aaa
+bbb
+```
+---
+
+                
+             
+
 
 
 
