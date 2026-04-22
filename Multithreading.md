@@ -3054,6 +3054,240 @@ bbb
 ```
 ---
 
+##  Example :
+``` java
+class A 
+{
+	 public synchronized void show() throws Exception 
+	{
+		System.out.println("aaa");
+		try{
+		 this. wait();
+		} catch(Exception e) {System.out.println("Exception Handled");}
+		System.out.println("bbb");
+	}
+}
+class demo1
+{
+	public static void main(String ar[]) throws Exception 
+	{
+		A a1 = new A();
+		a1.show();
+	}
+}
+Output :
+"aaa" prints ✅
+wait() is called
+Thread releases the lock
+Thread goes into WAITING state
+❌ No other thread calls notify()
+
+👉 So the program stops here forever
+```
+---
+
+## Example : Solution for Above Problem :
+``` java
+class A 
+{
+    public synchronized void show() throws Exception 
+    {
+        System.out.println("aaa");
+        wait();   // waiting
+        System.out.println("bbb");
+    }
+}
+
+class demo1
+{
+    public static void main(String ar[]) throws Exception 
+    {
+        A a1 = new A();
+
+        // Thread that will wake up the waiting thread
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000); // wait 1 sec
+                synchronized(a1) {
+                    a1.notify();   // 🔔 wake up
+                }
+            } catch(Exception e) {}
+        }).start();
+
+        a1.show();
+    }
+}
+Output : 
+aaa
+bbb 
+```
+---
+
+## Example : If in Above program  we remove the Thread.sleep() method 
+
+``` java
+class A 
+{
+    public synchronized void show() throws Exception 
+    {
+        System.out.println("aaa");
+        wait();   // waiting
+        System.out.println("bbb");
+    }
+}
+
+class demo1
+{
+    public static void main(String ar[]) throws Exception 
+    {
+        A a1 = new A();
+
+        // Thread that will wake up the waiting thread
+        new Thread(() -> {
+            try {
+               
+                synchronized(a1) {
+                    a1.notify();   // 🔔 wake up
+                }
+            } catch(Exception e) {}
+        }).start();
+
+        a1.show();
+    }
+}
+Output : 
+
+✅ Case 1: Correct execution (most expected sometimes)
+Flow:
+Main thread starts show()
+Prints "aaa"
+Calls wait() → goes to WAITING
+Second thread runs → calls notify()
+Main thread wakes up → prints "bbb"
+Output:
+aaa
+bbb
+❌ Case 2: Lost notification (important case)
+Flow:
+Second thread runs first
+It acquires lock and calls notify()
+❗ No thread is waiting yet → notification is lost
+Main thread runs:
+prints "aaa"
+calls wait()
+❌ No one will notify now
+
+👉 Main thread waits forever
+
+Output:
+aaa
+
+(Program hangs)
+
+```
+---
+
+##  Example :
+``` java
+class A 
+{
+    public synchronized void show() throws Exception 
+    {
+        System.out.println("aaa");
+        wait(2000);   // waiting
+        System.out.println("bbb");
+    }
+}
+
+class demo1
+{
+    public static void main(String ar[]) throws Exception 
+    {
+        A a1 = new A();
+
+       
+        a1.show();
+    }
+}
+```
+---
+
+## Example :
+``` java
+class  A 
+{
+	void show()
+	{
+		System.out.println("ccc");
+		 notify() ;
+		System.out.println("ddd");
+	}
+	synchronized void show2()  
+	{
+		System.out.println("aaa");
+		try {wait(); } catch (Exception e) { System.out.println("Exception  Handled in show 2 method ");}
+		System.out.println();
+	}
+}
+
+class demo1 
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		a1.show2();
+		a1.show();
+	}
+}
+Ouptut 
+aaa
+then stuck forever
+```
+---
+
+## Example  : Solution for above problem
+``` java 
+class A 
+{
+    synchronized void show()
+    {
+        System.out.println("ccc");
+        notify();
+        System.out.println("ddd");
+    }
+
+    synchronized void show2()  
+    {
+        System.out.println("aaa");
+        try { wait(); } catch (Exception e) {}
+        System.out.println("bbb");
+    }
+}
+
+class demo1 
+{
+    public static void main(String ar[])
+    {
+        A a1 = new A();
+
+        new Thread(() -> {
+			
+			try {Thread.sleep(100);} catch(Exception e) {}
+            a1.show();   // will notify
+        }).start();
+
+        a1.show2();  // will wait
+    }
+}
+Output :
+aaa
+bbb
+ccc
+ddd
+```
+---
+
+
                 
              
 
