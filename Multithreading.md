@@ -2994,6 +2994,23 @@ Teacher says : "Here the answer" (notify()) student  resumes the conversations
 ```
 ---
 
+##  Note :
+-Compulory to use wait() ,notify() and notifyAll()  inside synchronized block or method otherwise we will get  IllegalMonitorStateException.
+-wait() method throws InterruptedException.
+
+
+## Differnece between notify() and notifyAll()
+``` java
+We use notify() method  to give notification for only one waiting thread ,if multiple threads are waiting then only one thread is notify() and
+remaining thread will have to wait() for further notification, which thread will be notify we can't except it depends on JVM.
+
+
+notifyAll() is a method of the Java Object class that is used in thread communication.
+It wakes up all threads that are waiting on the same object (monitor).
+
+```
+---
+
 
 
 ## Example :
