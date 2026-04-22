@@ -3287,6 +3287,64 @@ ddd
 ```
 ---
 
+## Example : 
+``` java
+class A implements Runnable 
+{
+	synchronized void show1()
+	{
+		System.out.println("ccc");
+		System.out.println("notify() method call");
+		notify();
+		System.out.println("ddd");
+		
+	}
+	synchronized void show2()
+	{
+		System.out.println("aaa");
+		System.out.println("wait method ");
+		try{ wait (); } catch(Exception e) {}
+		System.out.println("bbb");
+	}
+	
+	int c=0;
+	public void run()
+	{
+		if(c==0)
+		{
+			c++;
+			show2();
+		}
+		else
+			show1();
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		A a1 = new A();
+		A a2 = new A ();
+		
+		Thread t1 = new Thread(a1);
+		Thread t2 = new Thread(a2);
+		
+		t1.start();
+		t2.start();
+		
+	}
+}
+Output : 
+aaa
+wait method
+aaa
+wait method
+then stuck  forever 
+
+```
+---
+
+
 
                 
              
