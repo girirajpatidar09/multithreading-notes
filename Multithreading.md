@@ -3529,6 +3529,15 @@ Maib thread trying to call wait() method
 👉 Program hangs, 5050 never prints
 ```
 ---
+## Producer-Consumer Problem 
+```text
+Producer thread is responsible to produce items to the queue  and consumer thread is responsible to consume items from the queue.If queue 
+is empty will call wait() method and entered into waiting state , After prodcing items to the queue , producer thread  is responsible 
+to call notify() method then waiting consumer will get that notification  and continue its execution with updated items.
+```
+---
+
+
 
 
 
