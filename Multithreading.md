@@ -3452,6 +3452,84 @@ bbb
 ```
 ---
 
+## Example :
+``` java
+class MyThread extends Thread 
+{
+	int total=0;
+	public void run()
+	{
+		synchronized(this)
+		{
+			System.out.println("Child thread starts calculating");
+			for(int i=1;i<=100;i++)
+			{
+				total=total+i;
+			}
+			System.out.println("Chile thread give notification ");
+			this.notify();
+		}
+	}
+}
+class demo1
+{
+	public static void main(String ar[]) throws Exception 
+	{
+		MyThread t = new MyThread();
+		t.start();
+		synchronized(t)
+		{
+			System.out.println("Maib thread trying to call wait() method");
+			t.wait();
+			System.out.println(t.total);
+			
+		}
+		
+	}
+}
+Ouput scenes : 
+
+✅ Case 1: Correct order (most expected)
+Flow:
+Main thread enters:
+synchronized(t)
+Prints:
+Maib thread trying to call wait() method
+Calls wait() → goes to WAITING
+Child thread runs:
+Child thread starts calculating
+Chile thread give notification
+Calls notify() → wakes main thread
+Main resumes:
+5050
+✅ Output:
+Maib thread trying to call wait() method
+Child thread starts calculating
+Chile thread give notification
+5050
+⚠️ Case 2: Child runs first (lost notification)
+Flow:
+Child thread runs first:
+Child thread starts calculating
+Chile thread give notification
+
+👉 Calls notify() ❗ (no thread is waiting → lost)
+
+Main thread runs:
+Maib thread trying to call wait() method
+Calls wait()
+
+👉 ❌ No notification now → waits forever
+
+❌ Output:
+Child thread starts calculating
+Chile thread give notification
+Maib thread trying to call wait() method
+
+👉 Program hangs, 5050 never prints
+```
+---
+
 
 
 
