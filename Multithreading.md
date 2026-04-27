@@ -3624,6 +3624,72 @@ ThreadGroup child = new ThreadGroup(parent, "ChildGroup");
 
 A child thread group
 Under a specified parent group
+```
+---
+
+
+``` java
+setMaxPriority() does NOT affect already created threads
+It only restricts future threads
+
+class demo1
+{
+	public static void main(String ar[])
+	{
+	
+	 ThreadGroup g1 = new ThreadGroup("tg");
+	 Thread t1  = new Thread(g1,"Thread_1");
+	 Thread t2  = new Thread(g1,"Thread_2");
+	 
+	 g1.setMaxPriority(3);
+	 Thread t3  = new Thread(g1,"Thread_3");
+	 System.out.println(t1.getPriority());
+	 System.out.println(t2.getPriority());
+	 System.out.println(t3.getPriority());
+	 
+	}
+
+}
+5
+5
+3
+``` 
+---
+# java.util.concurrent package 
+
+
+## Problems before concurrent package 
+```text
+
+1. Thread Management Complexity :
+Creating and managing thread manually  is messy.
+
+2.  Deadlocks from Poor Locking → Solved by ReentrantLock, tryLock()
+Problem: synchronized blocks could deadlock with no way to timeout or back off.
+
+
+3. Race Conditions → Solved by Atomic classes & Locks
+Problem: Multiple threads reading/writing shared data simultaneously causes unpredictable results.
+
+4. No Way to Return Results from Threads → Solved by Callable + Future
+
+5. Thread Coordination was Error-Prone → Solved by CountDownLatch, CyclicBarrier
+Problem: Using wait()/notify() for coordination was fragile and hard to understand.
+
+
+6. Unsafe Shared Collections → Solved by Concurrent Collections
+Problem: HashMap, ArrayList etc. throw ConcurrentModificationException or corrupt data under concurrent access.
+
+
+7. Blocking I/O Wasted Threads → Solved by BlockingQueue + thread pools
+Problem: Threads would sit idle waiting for data with no structured handoff mechanism.
+
+8. No Async Pipeline Support → Solved by CompletableFuture
+Problem: Chaining async steps required deeply nested callbacks or blocking get() calls.
+
+```
+---
+
 
 
 
