@@ -3788,6 +3788,10 @@ signal() → notify
 ``` text 
 Implementation class of ReentrantLock.
 
+Internally  ReentrantLock increaments threads personal count  whenever we call lock method and decreament count value , whenever thread calls
+unlock method and lock will be released whenever count reacher zero.
+
+
 🔹 Why is it called Reentrant?
 
 👉 Reentrant means:
@@ -3829,6 +3833,21 @@ class Demo {
 ReentrantLock lock = new ReentrantLock(true); // fair lock
 true → FIFO order (first come, first serve)
 false (default) → faster but no guarantee
+
+
+
+# Constructors of ReentrantLock
+
+1. ReentrantLock lock = new ReentrantLock();
+
+2.ReentrantLock lock = new ReentrantLock(boolean fairness);
+
+Creates a RL with the given fairness policy , if fairness is true then longest waiting thread  can acquire the lock if it is available  i.e. it follows
+FCFS policy.
+
+If fairness is false then which waiting thread will get a chance we can't expect.
+
+Note : the default value for fairness is false 
 
 
 
