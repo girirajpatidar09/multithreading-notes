@@ -3854,6 +3854,103 @@ Note : the default value for fairness is false
 
 
 
+## Examples :
+``` java
+# Working using Synchronization
+
+class Display
+{
+	public synchronized void wish(String name)
+	{
+		for(int i=1;i<=10;i++)
+		{
+			System.out.print("Good Morning");
+			try{Thread.sleep(1000);} catch(InterruptedException e ){}
+			System.out.println(name);
+		}
+	}
+}
+
+class MyThread extends Thread 
+{
+	Display d;
+	String name ;
+	MyThread(Display d , String name)
+	{
+		this.d=d;
+		this.name=name;
+	}
+	
+	public void run()
+	{
+		d.wish(name);
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		Display d = new Display();
+		MyThread t1 = new MyThread(d,"dhoni");
+		MyThread t2 = new MyThread(d,"yuraj");
+		t1.start();
+		t2.start();
+	}
+}
+
+
+
+# Same working without using synchronization 
+
+import java.util.concurrent.locks.*;
+class Display
+{
+	 ReentrantLock l =  new ReentrantLock();
+	public  void wish(String name)
+	{
+		l.lock();
+		for(int i=1;i<=10;i++)
+		{
+			
+			System.out.print("Good Morning : ");
+			try{Thread.sleep(1000);} catch(InterruptedException e ){}
+			System.out.println(name);
+		}
+		l.unlock();
+	}
+}
+
+class MyThread extends Thread 
+{
+	Display d;
+	String name ;
+	MyThread(Display d , String name)
+	{
+		this.d=d;
+		this.name=name;
+	}
+	
+	public void run()
+	{
+		d.wish(name);
+	}
+}
+class demo1
+{
+	public static void main(String ar[])
+	{
+		Display d = new Display();
+		MyThread t1 = new MyThread(d,"dhoni");
+		MyThread t2 = new MyThread(d,"yuraj");
+		t1.start();
+		t2.start();
+	}
+}
+
+```
+---
+
+
 
 
 
