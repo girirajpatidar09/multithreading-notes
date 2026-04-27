@@ -3771,6 +3771,49 @@ To call this compulosry current thread should be owner of lock otherwise we will
 ---
 
 
+## ReentrantLock 
+``` text 
+Implementation class of ReentrantLock.
+
+🔹 Why is it called Reentrant?
+
+👉 Reentrant means:
+
+The same thread can acquire the same lock multiple times without getting blocked.
+
+🔸 Example idea:
+
+If a thread already holds the lock, it can enter again.
+
+lock.lock();  // 1st time
+lock.lock();  // 2nd time (allowed)
+
+⚠️ But you must call unlock() the same number of times.
+
+-----------
+
+
+🔹 Basic Example
+import java.util.concurrent.locks.*;
+
+class Demo {
+    static ReentrantLock lock = new ReentrantLock();
+
+    public static void main(String[] args) {
+
+        lock.lock();
+        try {
+            System.out.println("Inside critical section");
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+
+
+
+
 
 
 
