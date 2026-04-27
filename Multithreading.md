@@ -3749,8 +3749,14 @@ lock.tryLock(2, TimeUnit.SECONDS);
 Avoids infinite waiting
 Helps prevent deadlocks
 
+4 void lockInterruptibly() throws InterruptedException
+
+acquires the lock if it is available and return immediately , if the lock is not returm immediately then it will wait() , while waiting if the
+thread is interrrupted then thread won't get the lock.
+
 ```
 ---
+
 
 
 
