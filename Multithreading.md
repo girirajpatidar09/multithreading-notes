@@ -3708,6 +3708,46 @@ To overcome thid problems   we have java .util. concurrent.locks in version 1.5
 
 
 
+## Lock interface 
+The Lock interface (from java.util.concurrent.locks) provides a more flexible and powerful way to handle synchronization compared to synchronized.
+Lock object is similar to  implicit lock acquired by a thread to execute synchonized method or block .
+
+## Methods of Lock interface 
+
+1. void lock()
+
+👉 Acquires the lock (waits indefinitely if not available)
+
+lock.lock();
+Thread will block until lock is available
+Similar to entering a synchronized block
+
+
+
+2 boolean tryLock()
+
+👉 Attempts to acquire lock without waiting
+
+if(lock.tryLock()) {
+    // critical section
+}
+else 
+{
+perform alternative operation 
+}
+
+Returns:
+true → lock acquired
+false → lock not acquired
+
+
+3 boolean tryLock(long time, TimeUnit unit)
+
+👉 Waits for a specific time to acquire lock
+
+lock.tryLock(2, TimeUnit.SECONDS);
+Avoids infinite waiting
+Helps prevent deadlocks
 
 
 
