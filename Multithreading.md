@@ -3755,7 +3755,7 @@ acquires the lock if it is available and return immediately , if the lock is not
 thread is interrrupted then thread won't get the lock.
 
 
-void unlock()
+5 void unlock()
 
 👉 Releases the lock
 
@@ -3764,6 +3764,19 @@ lock.unlock();
 ⚠️ Must always be called after lock()
 
 To call this compulosry current thread should be owner of lock otherwise we will get runtime exception saying IllegalMonitorStateException 
+
+
+
+6 . ondition newCondition()
+
+👉 Creates a condition object (like wait/notify)
+
+Condition condition = lock.newCondition();
+
+Used with:
+
+await() → wait
+signal() → notify
 
 
 
@@ -3809,6 +3822,13 @@ class Demo {
         }
     }
 }
+
+
+
+2️⃣ Fairness Policy (Important 🔥)
+ReentrantLock lock = new ReentrantLock(true); // fair lock
+true → FIFO order (first come, first serve)
+false (default) → faster but no guarantee
 
 
 
