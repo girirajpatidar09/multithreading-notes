@@ -3691,7 +3691,7 @@ Problem: Chaining async steps required deeply nested callbacks or blocking get()
 ---
 
 ## Problems with traditional synchonized keyword 
-``` text 
+
 1. We are  not having any flexibility to try for a lock without waiting.
 
 2. There is no way to specify maximun waiting time for a thread to get a lock  ,so that thread will wait untill getting lock  which may
@@ -3706,8 +3706,7 @@ Problem: Chaining async steps required deeply nested callbacks or blocking get()
 
 To overcome thid problems   we have java .util. concurrent.locks in version 1.5 
 
-```
----
+
 
 
 
