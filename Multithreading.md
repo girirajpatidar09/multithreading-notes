@@ -3754,6 +3754,19 @@ Helps prevent deadlocks
 acquires the lock if it is available and return immediately , if the lock is not returm immediately then it will wait() , while waiting if the
 thread is interrrupted then thread won't get the lock.
 
+
+void unlock()
+
+👉 Releases the lock
+
+lock.unlock();
+
+⚠️ Must always be called after lock()
+
+To call this compulosry current thread should be owner of lock otherwise we will get runtime exception saying IllegalMonitorStateException 
+
+
+
 ```
 ---
 
