@@ -3535,16 +3535,97 @@ Producer thread is responsible to produce items to the queue  and consumer threa
 is empty will call wait() method and entered into waiting state , After prodcing items to the queue , producer thread  is responsible 
 to call notify() method then waiting consumer will get that notification  and continue its execution with updated items.
 ```
+---	
+
+## DeadLock 
+``` text
+A DeadLock is a situation where two or more threads are stuck forever , waiting  for each other's resources and none of them can proceed.
+```
+---
+## DeadLock vs Starvation
+```text
+-Long waiting of a thread where waiting never ends is called deadLock.
+
+- Lond waiting of a thread where waiting enda at certain point  is called starvation.
+
+Eg. Low priority  thread has to wait untill completing all high prioirty threads. It may be long waiting but ends at certain point which
+is nothing but a starvation.
+
+```
+---
+
+## Daemon Threads :
+``` text
+The thread which is executing in the backgroud is called daemon thread.
+Eg Garbage collector ,AttachListener, Signal Dispatcher.
+
+The main objective of daemon threads is to provide support for non-daemon thread(main thread).
+
+Eg :
+If the main thread runs wiht low memory then jvm runs GC to destroy useless objects so that no. of bytes of free memory will be improved,
+with this free memory main thread can continue its execution/
+
+Usually daemon thread having low priorit but based on our requirement daemon threads can run with higher priority also.
+
+Two Method--:
+1.public boolean isDaemon()
+2. public void setDaemon(boolean b)
+
+If we are using setDaemon() method after starting the thread then we will get IllegalThreadStateException
+
+By default main thread is always non-daemon  and for all remaining threads, daemon nature will be inherited from parent to child.
+
+
+When last non-daemon thread terminates automatically all daemon threads will be terminated irrespective of their position.
+
+```
 ---
 
 
+## ThreadGroup :
+``` text 
+Based on functionality we can group threads into a single unit which is nothing but Thread group i.e.  thread group  contains a group of threads.
+In addition to threads , thread group can  also contain sub-thread groups.
 
 
+The main advantage of maintaining threads in form of thread group is we can perform thread group very easily.
 
 
+Every thread in java belongs to some group , main thread belongs to main  group , every thread  group in java is child  group directly
+or indirectly . Hence System group acts as a root for all thread groups in java.
 
-                
-             
+
+System group contains several system level threads , like finalizer , reference handler, signal dispatcher, attachListener
+
+
+System.out.println(Thread.currenThread().getThreadGroup().getName());
+System.out.println(Thread.currenThread().getThreadGroup().getParent());
+System.out.println(Thread.currenThread().getThreadGroup().getParent().getName());
+
+
+ThreadGroup :
+
+ThreadGroup is a class and directly extedns object class
+
+Constructor :
+
+1️⃣ ThreadGroup(String name)
+ThreadGroup tg = new ThreadGroup("MyGroup");
+
+👉 Creates a new thread group with:
+
+Given name
+Parent = current thread’s group
+2️⃣ ThreadGroup(ThreadGroup parent, String name)
+ThreadGroup parent = new ThreadGroup("ParentGroup");
+ThreadGroup child = new ThreadGroup(parent, "ChildGroup");
+
+👉 Creates:
+
+A child thread group
+Under a specified parent group
+
+
 
 
 
