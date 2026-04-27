@@ -3713,7 +3713,7 @@ The Lock interface (from java.util.concurrent.locks) provides a more flexible an
 Lock object is similar to  implicit lock acquired by a thread to execute synchonized method or block .
 
 ## Methods of Lock interface 
-
+``` text
 1. void lock()
 
 👉 Acquires the lock (waits indefinitely if not available)
@@ -3748,6 +3748,11 @@ false → lock not acquired
 lock.tryLock(2, TimeUnit.SECONDS);
 Avoids infinite waiting
 Helps prevent deadlocks
+
+```
+---
+
+
 
 
 
