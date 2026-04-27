@@ -3825,7 +3825,7 @@ class Demo {
 
 
 
-2️⃣ Fairness Policy (Important 🔥)
+2 Fairness Policy (Important 🔥)
 ReentrantLock lock = new ReentrantLock(true); // fair lock
 true → FIFO order (first come, first serve)
 false (default) → faster but no guarantee
