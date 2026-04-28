@@ -4053,6 +4053,114 @@ Second Thread...releases lock
 ```
 ---
 
+# Thread Pools [Executor Framework]
+``` text 
+
+
+Creating  a new thread for every job may create performance and memory  problems to overcome this we should for thread pools , thread pool
+is a pool of already created thread  ready to do our jobs .
+ 
+Java 1.5 version introduces thread pool  framework to implement thread pools.
+
+Thread pool framework also known as Executor framework`
+
+
+
+A Thread Pool is a collection of pre-created worker threads that are reused to execute multiple tasks.
+Instead of creating a new thread every time, you submit tasks to the pool, and it assigns them to available threads.
+
+# We  can create  a thread pool as follows :
+
+import java.util.concurrent.*;
+ExecutorService service = Executors.newFixedThreadPool(3);
+
+
+#  We cab submit a runnable job by using a submit method :
+service.submit(job);
+
+# We can shutdown executor service by using shutdown method 
+service.shutdown();
+
+``` 
+---
+
+## Example :
+``` java
+import java.util.concurrent.*;
+
+class A implements Runnable {
+    public void run() {
+        for(int i = 1; i <= 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " " + i);
+        }
+    }
+}
+
+class demo1 {
+    public static void main(String[] args) {
+
+        ExecutorService service = Executors.newFixedThreadPool(3);
+
+        A task1 = new A();
+        A task2 = new A();
+        A task3 = new A();
+
+        service.execute(task1);
+        service.execute(task2);
+        service.execute(task3);
+
+        service.shutdown();
+    }
+}
+```
+---
+
+## Exampel :
+``` java
+import java.util.concurrent.*;
+
+class PrintJob implements Runnable {
+    String name;
+
+    PrintJob(String name) {
+        this.name = name;
+    }
+
+    public void run() {
+        System.out.println(name + " ..job started by thread: " 
+                + Thread.currentThread().getName());
+        try { Thread.sleep(5000); } catch(Exception e) {}
+        System.out.println(name + " ..job completed by thread: " 
+                + Thread.currentThread().getName());
+    }
+}
+
+class demo1 {
+    public static void main(String[] args) {
+
+        PrintJob[] jobs = {
+            new PrintJob("durga"),
+            new PrintJob("Ravi"),
+            new PrintJob("shiva"),
+            new PrintJob("pavan"),
+            new PrintJob("Suresh"),
+            new PrintJob("Anil")
+        };
+
+        ExecutorService service = Executors.newFixedThreadPool(3);
+
+        for(PrintJob job : jobs) {
+            service.submit(job);
+        }
+
+        service.shutdown();
+    }
+}
+Mixed 
+```
+---
+
+
 
 
 
