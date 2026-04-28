@@ -4157,9 +4157,32 @@ class demo1 {
     }
 }
 Output : Mixed  
-In the above example three threads are responsible  to execute 6 jobs  so that a single can be reused for multiple  jobs 
+In the above example three threads are responsible  to execute 6 jobs  so that a single can be reused for multiple  jobs .
 ```
 ---
+
+
+
+# Callable  and Future 
+
+```text
+In case  of Runnable job threads won't return anything after completin a job.
+
+If a thread is required to return some result after execution then we should  go for callable.
+
+public interface Callable<V> {
+    V call() throws Exception;
+}
+
+If we submit callable object to executor then after completing the object thread returns an object of Future i.e. future object can be used to reterieve the
+result from callable job.
+
+```
+---
+
+
+
+
 
 
 
