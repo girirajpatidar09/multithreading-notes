@@ -4235,14 +4235,14 @@ class demo1
 
 ``` text 
 
-| Feature            | Runnable                             | Callable                      |
-| ------------------ | --------------------------------     | ----------------------------- |
-| Package            | `java.lang`                          | `java.util.concurrent`        |
-| Method             | `void run()`                         | `V call()`                    |
+| Feature            | Runnable                             | Callable                        |
+| ------------------ | --------------------------------     | -----------------------------   |
+| Package            | `java.lang`                          | `java.util.concurrent`          |
+| Method             | `void run()`                         | `V call()`                      |
 | Return value       | ❌ No return                         | ✅ Returns result              |
 | Exception handling | ❌ Cannot throw checked exception    | ✅ Can throw checked exception |
-| Introduced in      | Java 1.0                              | Java 5                        |
-| Used with          | Thread / Executor                     | ExecutorService               |
+| Introduced in      | Java 1.0                             | Java 5                          |
+| Used with          | Thread / Executor                    | ExecutorService                 |
 | Result handling    | ❌ Not possible                      | ✅ Via `Future`                |
 
 ```
