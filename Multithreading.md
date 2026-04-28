@@ -4156,9 +4156,11 @@ class demo1 {
         service.shutdown();
     }
 }
-Mixed 
+Output : Mixed  
+In the above example three threads are responsible  to execute 6 jobs  so that a single can be reused for multiple  jobs 
 ```
 ---
+
 
 
 
