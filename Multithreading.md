@@ -4181,6 +4181,74 @@ result from callable job.
 ---
 
 
+## Example 
+``` java
+import  java.util.concurrent.*;
+
+class MyCallable implements Callable
+{
+	int num;
+	MyCallable(int num)
+	{
+		 this.num=num;
+	}
+	
+	public Object call() throws Exception 
+	{
+		System.out.println(Thread.currentThread().getName()+"is... responsible to find the sum of first "+num+ " numbers : ");
+		int sum=0;
+		for(int i=1;i<=num;i++)
+		{
+			sum=sum+i;
+		
+		}
+		return sum;
+		
+	}
+}
+
+class demo1
+{
+	public static void main(String ar[]) throws Exception 
+	{
+		MyCallable[] jobs = { new MyCallable(10),
+		                       new MyCallable(20),
+							    new MyCallable(30),
+								new MyCallable(40),
+								new MyCallable(50),
+								new MyCallable(60),
+								};
+	
+	ExecutorService service = Executors.newFixedThreadPool(3);
+	for(MyCallable job :jobs)
+	{
+		Future f = service.submit(job);
+		System.out.println(f.get());
+	}
+	service.shutdown();
+	}
+}
+```
+---
+
+## Differnce between Runnable and Callable 
+
+``` text 
+
+| Feature            | Runnable                             | Callable                      |
+| ------------------ | --------------------------------     | ----------------------------- |
+| Package            | `java.lang`                          | `java.util.concurrent`        |
+| Method             | `void run()`                         | `V call()`                    |
+| Return value       | ❌ No return                         | ✅ Returns result              |
+| Exception handling | ❌ Cannot throw checked exception    | ✅ Can throw checked exception |
+| Introduced in      | Java 1.0                              | Java 5                        |
+| Used with          | Thread / Executor                     | ExecutorService               |
+| Result handling    | ❌ Not possible                      | ✅ Via `Future`                |
+
+```
+---
+
+
 
 
 
